@@ -10,7 +10,10 @@ public class MainThread {
         System.out.println("Начался основной поток");
 
         Thread consumer_thread = new Thread(new Consumer(sharedQueue));
-        Thread producer_thread = new Thread(new Producer(sharedQueue));
+        Thread producer_thread = new Thread(() -> {
+            Producer dataGenerator = new Producer(sharedQueue);
+            dataGenerator.generateIntData();
+        });
         producer_thread.start();
         consumer_thread.start();
 

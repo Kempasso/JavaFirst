@@ -6,25 +6,30 @@ import java.util.concurrent.BlockingQueue;
 public class Consumer implements Runnable {
     private final BlockingQueue<Integer> sharedQueue;
 
-    @Override
-    synchronized public void run() {
-        System.out.println("Запуск потока consumer");
-        int i = 0;
-        while (true) {
-            try {
-                int value = sharedQueue.take();
-                wait(300);
-                System.out.println(value);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("Consumer " + i);
-        }
-    }
-
-
     public Consumer(BlockingQueue<Integer> sharedQueue) {
         this.sharedQueue = sharedQueue;
     }
+    @Override
+    public void run() {
+        System.out.println("Запуск потока consumer");
+        while (true) {
+            try {
+                synchronized (sharedQueue) {
+                    int value = sharedQueue.take();
+                    System.out.println(sharedQueue);
+                    System.out.println(value);
+                    sharedQueue.notify();
+                    sharedQueue.wait();
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+        }
+    }
+
 }
 

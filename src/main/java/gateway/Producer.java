@@ -2,8 +2,6 @@ package gateway;
 
 import java.util.concurrent.BlockingQueue;
 
-import static gateway.MainThread.sharedQueue;
-
 public class Producer implements Runnable {
     private final BlockingQueue<Integer> sharedQueue;
 

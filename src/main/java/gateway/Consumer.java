@@ -2,7 +2,6 @@ package gateway;
 
 import java.util.concurrent.BlockingQueue;
 
-import static gateway.MainThread.sharedQueue;
 
 public class Consumer implements Runnable {
     private BlockingQueue<Integer> sharedQueue;
@@ -22,7 +21,6 @@ public class Consumer implements Runnable {
             System.out.println("Consumer " + i);
         }
     }
-
 
 
     public Consumer(BlockingQueue<Integer> sharedQueue) {

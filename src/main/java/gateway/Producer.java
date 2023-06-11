@@ -6,7 +6,6 @@ public class Producer implements Runnable {
     private final BlockingQueue<Integer> sharedQueue;
 
     @Override
-
     synchronized public void run() {
         System.out.println("Start producer thread");
         while (true) {

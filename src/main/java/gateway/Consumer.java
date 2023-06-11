@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 
 public class Consumer implements Runnable {
-    private BlockingQueue<Integer> sharedQueue;
+    private final BlockingQueue<Integer> sharedQueue;
 
     @Override
     synchronized public void run() {

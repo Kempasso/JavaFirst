@@ -1,6 +1,7 @@
 package gateway;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Producer implements Runnable {
     private final BlockingQueue<Integer> sharedQueue;
@@ -16,13 +17,8 @@ public class Producer implements Runnable {
             int i = 0;
             for (; i < 5; i++) {
                 try {
-                    synchronized (sharedQueue) {
-                        sharedQueue.put(i);
-                        System.out.println(sharedQueue);
-                        sharedQueue.notify();
-                        sharedQueue.wait();
-                        Thread.sleep(1000);
-                    }
+                    sharedQueue.put(i);
+                    System.out.println(sharedQueue);
 
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

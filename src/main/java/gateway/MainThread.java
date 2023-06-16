@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class MainThread {
-    static final BlockingQueue<Integer> sharedQueue = new LinkedBlockingQueue<>(5);
+    static final BlockingQueue<Integer> sharedQueue = new LinkedBlockingQueue<>(10);
 
     public static void main(String[] args) {
         System.out.println("Начался основной поток");
